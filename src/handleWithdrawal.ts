@@ -11,6 +11,7 @@ export function handleWithdrawal(event: Withdrawal): void {
 
   let account = getAccount(event.params.src, tx);
   account.totalETHWithdrawn = integers.increment(account.totalETHWithdrawn, amount);
+  account.tokenBalance = integers.decrement(account.tokenBalance, amount);
   account.save();
 
   let history = getHistory(tx, event.block.number);

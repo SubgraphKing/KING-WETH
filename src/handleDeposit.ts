@@ -18,6 +18,7 @@ export function handleDeposit(event: Deposit): void {
 
   let account = getAccount(event.params.dst, tx);
   account.totalETHDeposited = integers.increment(account.totalETHDeposited, amount);
+  account.tokenBalance = integers.increment(account.tokenBalance, amount);
   account.save();
 
   let history = getHistory(tx, event.block.number);
