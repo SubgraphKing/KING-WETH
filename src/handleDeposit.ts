@@ -3,6 +3,7 @@ import { getAccount } from "./utils/getAccount";
 import { logTransaction } from "./utils/logTransaction";
 import { getHistory } from "./utils/getHistory";
 import { integers } from "./utils/integers";
+import { constants } from "./utils/CONSTS";
 /*
 Handle approval is for when a user gives another permission to spend their tokens. 
 
@@ -23,5 +24,6 @@ export function handleDeposit(event: Deposit): void {
 
   let history = getHistory(tx, event.block.number);
   history.totalSupply = integers.increment(history.totalSupply, amount);
+  history.totalDepositCount = integers.increment(history.totalDepositCount, constants.BIGINT_ONE);
   history.save();
 }

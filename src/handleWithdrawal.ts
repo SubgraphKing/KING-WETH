@@ -3,6 +3,8 @@ import { getAccount } from "./utils/getAccount";
 import { logTransaction } from "./utils/logTransaction";
 import { getHistory } from "./utils/getHistory";
 import { integers } from "./utils/integers";
+import { constants } from "./utils/CONSTS";
+
 
 
 export function handleWithdrawal(event: Withdrawal): void {
@@ -16,5 +18,6 @@ export function handleWithdrawal(event: Withdrawal): void {
 
   let history = getHistory(tx, event.block.number);
   history.totalSupply = integers.decrement(history.totalSupply, amount);
+  history.totalWithdrawalCount = integers.increment(history.totalWithdrawalCount, constants.BIGINT_ONE);
   history.save();
 }
